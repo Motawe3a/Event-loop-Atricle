@@ -1,4 +1,4 @@
-#Event loop: microtasks and macrotasks
+# Event loop: microtasks and macrotasks
 
 Browser JavaScript execution flow, as well as in Node.js, is based on an event loop.
 
@@ -6,7 +6,7 @@ Understanding how event loop works is important for optimizations, and sometimes
 
 In this chapter we first cover theoretical details about how things work, and then see practical applications of that knowledge.
 
-##Event Loop
+## Event Loop
 
 The event loop concept is very simple. There’s an endless loop, where the JavaScript engine waits for tasks, executes them and then sleeps, waiting for more tasks.
 
@@ -42,7 +42,7 @@ Rendering never happens while the engine executes a task. It doesn’t matter if
 If a task takes too long, the browser can’t do other tasks, such as processing user events. So after a time, it raises an alert like “Page Unresponsive”, suggesting killing the task with the whole page. That happens when there are a lot of complex calculations or a programming error leading to an infinite loop.
 That was the theory. Now let’s see how we can apply that knowledge.
 
-##Use-case 1: splitting CPU-hungry tasks
+## Use-case 1: splitting CPU-hungry tasks
 
 Let’s say we have a CPU-hungry task.
 
@@ -150,7 +150,7 @@ That’s simple: as you remember, there’s the in-browser minimal delay of 4ms 
 
 Finally, we’ve split a CPU-hungry task into parts – now it doesn’t block the user interface. And its overall execution time isn’t much longer.
 
-##Use case 2: progress indication
+## Use case 2: progress indication
 
 Another benefit of splitting heavy tasks for browser scripts is that we can show progress indication.
 
@@ -208,7 +208,7 @@ This looks prettier:
 
 Now the `<div>` shows increasing values of i, a kind of a progress bar.
 
-##Use case 3: doing something after the event
+## Use case 3: doing something after the event
 
 In an event handler we may decide to postpone some actions until the event bubbled up and was handled on all levels. We can do that by wrapping the code in zero delay `setTimeout`.
 
@@ -228,7 +228,7 @@ menu.onclick = function() {
 };
 ```
 
-##Macrotasks and Microtasks
+## Macrotasks and Microtasks
 
 Along with macrotasks, described in this chapter, there are microtasks, mentioned in the chapter Microtasks.
 
@@ -289,7 +289,7 @@ Here’s an example with “counting progress bar”, similar to the one shown p
 </script>
 ```
 
-##Summary
+## Summary
 
 A more detailed event loop algorithm (though still simplified compared to the specification):
 
@@ -315,7 +315,7 @@ There’s no UI or network event handling between microtasks: they run immediate
 
 So one may want to `queueMicrotask` to execute a function asynchronously, but within the environment state.
 
-####Web Workers
+#### Web Workers
 ```
 For long heavy calculations that shouldn’t block the event loop, we can use Web Workers.
 
@@ -326,8 +326,8 @@ Web Workers can exchange messages with the main process, but they have their own
 Web Workers do not have access to DOM, so they are useful, mainly, for calculations, to use multiple CPU cores simultaneously.
 ```
 
-##Tasks
-####What will be the output of this code?
+## Tasks
+#### What will be the output of this code?
 ```
 console.log(1);
 
